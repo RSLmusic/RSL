@@ -54,7 +54,6 @@
 
   .rl-stagger { opacity: 0; animation: rlFadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) both; }
 
-  /* Bottom-sheet modal style on small screens, centered card on larger ones */
   .rl-modal-backdrop { animation: rlFadeIn 0.25s ease both; }
   @media (max-width: 767px) {
     .rl-modal-sheet {
@@ -452,7 +451,7 @@ function AnimatedNumber({ value, formatFn, duration = 700 }) {
 
 function StatCard({ icon, label, value, sub, accent, numericValue, formatFn }) {
   return (
-    <div className="rl-card min-w-0 bg-zinc-900 border border-zinc-800 rounded-xl p-4 flex flex-col gap-2">
+    <div className="rl-card bg-zinc-900 border border-zinc-800 rounded-xl p-4 flex flex-col gap-2">
       <div className="flex items-center justify-between">
         <span className="text-xs font-mono uppercase tracking-wide text-zinc-500">{label}</span>
         <Ic name={icon} size={16} className={accent ? "text-red-500" : "text-zinc-500"} />
@@ -483,7 +482,7 @@ function MiniBarChart({ data, valueKey, labelKey, color, formatValue }) {
   return (
     <div className="flex items-end gap-2" style={{ height: 200 }}>
       {data.map((d, i) => (
-        <div key={i} className="flex-1 min-w-0 flex flex-col items-center gap-1 h-full">
+        <div key={i} className="flex-1 flex flex-col items-center gap-1 h-full">
           <span className="text-xs text-zinc-500 font-mono">{formatValue ? formatValue(d[valueKey]) : d[valueKey]}</span>
           <div className="w-full bg-zinc-800 rounded-t flex items-end flex-1">
             <div style={{ height: `${(d[valueKey] / max) * 100}%`, background: color || "#dc2626" }} className="w-full rounded-t transition-all duration-500" />
@@ -930,7 +929,7 @@ function DashboardView({ artists, stats, recentActivity, onOpenArtist }) {
           {recentActivity.length === 0 ? <p className="text-sm text-zinc-500 py-6 text-center">Your actions will show up here.</p> : (
             <ul className="space-y-2 max-h-56 overflow-y-auto">{recentActivity.map((t) => (
               <li key={t.id} className="flex items-center justify-between text-sm gap-2">
-                <span className="text-zinc-300 truncate min-w-0">{t.artistName ? `${t.artistName}: ` : ""}{t.text}</span>
+                <span className="text-zinc-300 truncate">{t.artistName ? `${t.artistName}: ` : ""}{t.text}</span>
                 <span className="text-xs font-mono text-zinc-500 whitespace-nowrap flex-none">{timeAgo(t.ts)}</span>
               </li>
             ))}</ul>
@@ -1411,7 +1410,7 @@ function App() {
           notifications={notifications} notifOpen={notifOpen} setNotifOpen={setNotifOpen} onDismissNotif={dismissNotification} onOpenArtist={handleOpenArtist}
           dataMenuOpen={dataMenuOpen} setDataMenuOpen={setDataMenuOpen} onExportCSV={handleExportCSV} onImportClick={handleImportClick} onClearAll={handleClearAll}
           fileInputRef={fileInputRef} onImportFileChange={handleImportFileChange} syncStatus={syncConfig ? syncStatus : "idle"} onOpenConnect={() => setConnectOpen(true)} />
-        <main className="flex-1 overflow-y-auto overflow-x-hidden" style={{ paddingBottom: "calc(env(safe-area-inset-bottom) + 76px)" }}>
+        <main className="flex-1 overflow-y-auto" style={{ paddingBottom: "calc(env(safe-area-inset-bottom) + 76px)" }}>
           {artists.length === 0 && (
             <div className="px-4 md:px-6 pt-4 rl-fade-in">
               <div className="bg-zinc-900 border border-dashed border-zinc-700 rounded-xl p-4 flex items-center justify-between flex-wrap gap-3">
